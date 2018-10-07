@@ -14,6 +14,7 @@ import android.widget.EditText;
 
 import com.otavio.iddog.Interfaces.ServiceAPI;
 import com.otavio.iddog.ListaDogs;
+import com.otavio.iddog.MainActivity;
 import com.otavio.iddog.R;
 
 import retrofit2.Call;
@@ -111,7 +112,7 @@ public class LoginEmail extends AppCompatActivity {
                          editor.putString("token", token);
                          editor.apply();
 
-                         Intent intent = new Intent(LoginEmail.this, ListaDogs.class);
+                         Intent intent = new Intent(LoginEmail.this, MainActivity.class);
                          startActivity(intent);
 
                          mEmail.setText("");

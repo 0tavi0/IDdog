@@ -4,6 +4,7 @@ package com.otavio.iddog.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Dogs {
@@ -13,7 +14,7 @@ public class Dogs {
     private String category;
     @SerializedName("list")
     @Expose
-    private List<String> urlsPhotos = null;
+    private List<String> urlsPhotos;
 
     public String getCategory() {
         return category;

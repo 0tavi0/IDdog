@@ -1,17 +1,22 @@
-package com.otavio.iddog;
+package com.otavio.iddog.Fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.TextView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.otavio.iddog.Adapters.AdapterURLs;
 import com.otavio.iddog.Interfaces.ServiceAPI;
 import com.otavio.iddog.Models.Dogs;
+import com.otavio.iddog.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,33 +27,37 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ListaDogs extends AppCompatActivity {
-
+public class Categoria_husky_Fragment extends Fragment {
     RecyclerView recyclerView;
     AdapterURLs recyclerAdapterURLS;
     List<Dogs> listDogs;
+    private LinearLayoutManager linearLayoutManager;
 
-    TextView txt_categoria;
-
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_dogs);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.husky_fragment, container, false);
 
-        SharedPreferences prefs = getSharedPreferences("token", Context.MODE_PRIVATE);
-        String token = prefs.getString("token", "sem token");
+        SharedPreferences prefs = this.getActivity().getSharedPreferences("token", Context.MODE_PRIVATE);
+        String token = prefs.getString("token", "null");
 
         listDogs = new ArrayList<>();
 
-        txt_categoria = findViewById(R.id.txt_categoria_nome);
+        Carregar(token);
 
-        recyclerView = findViewById(R.id.recycler);
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView = view.findViewById(R.id.recycler_husk);
+
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
 
 
+        return view;
 
+    }
+
+    public void Carregar(String token){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api-iddog.idwall.co")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -60,23 +69,15 @@ public class ListaDogs extends AppCompatActivity {
         call.enqueue(new Callback<Dogs>() {
             @Override
             public void onResponse(Call<Dogs> call, Response<Dogs> response) {
-                Log.e("Code",""+response.code());
 
                 if (response.isSuccessful()){
 
-                    txt_categoria.setText(response.body().getCategory());
 
                     Dogs dogs = response.body();
                     dogs.setList(response.body().getList());
 
-                    Log.e("dogs",""+dogs.getList());
-
                     listDogs.add(dogs);
-
-
-                   // recyclerAdapter.setListaDog(listDogs);
-
-                    recyclerAdapterURLS = new AdapterURLs(dogs.getList(),getApplicationContext());
+                    recyclerAdapterURLS = new AdapterURLs(dogs.getList(),getContext());
                     recyclerView.setAdapter(recyclerAdapterURLS);
 
 
@@ -89,6 +90,8 @@ public class ListaDogs extends AppCompatActivity {
 
             }
         });
-
     }
+
+
+
 }
