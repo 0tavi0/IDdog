@@ -4,18 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login.LoginEmail"
-    tools:layout_editor_absoluteY="81dp">
+    android:screenOrientation="portrait"
+    tools:context=".activitys.LoginEmailActivity"
+    tools:layout_editor_absoluteY="25dp">
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="48dp"
-        android:layout_marginEnd="42dp"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="122dp"
-        app:layout_constraintBottom_toTopOf="@+id/email_sign_in"
+        android:layout_width="300dp"
+        android:layout_height="77dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="156dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -34,15 +33,17 @@
     <Button
         android:id="@+id/email_sign_in"
         style="?android:textAppearanceSmall"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="243dp"
-        android:layout_marginEnd="47dp"
-        android:layout_marginStart="47dp"
+        android:layout_width="294dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
         android:text="@string/action_sign_in"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        app:layout_constraintVertical_bias="0.065" />
 </android.support.constraint.ConstraintLayout>
